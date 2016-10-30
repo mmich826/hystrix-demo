@@ -17,11 +17,11 @@ public class DemoSvcApplication {
 	}
 }
 
-x
+
 @RestController
 class MyServiceController {
 	int counter = 0;
-	int sleepMilli = 400;
+	int sleepMilli = 300;
 
 	@RequestMapping(value="/car", method = RequestMethod.GET)
 	String getCarData(Model model) {

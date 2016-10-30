@@ -9,17 +9,12 @@ import org.springframework.web.client.RestTemplate;
 public class CarDataUsingCmdDao {
 
     @Autowired
-    private CarDataCommand carDataCommand;
+    private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "carData2Fallback")
     public String getCarData2()
 
     {
-        return carDataCommand.run();
-    }
-
-    public String carData2Fallback() {
-        System.out.println("------ carData2Fallback");
-        return "No Car (carData2Fallback)";
+        String result = new CarDataCommand(restTemplate).execute();
+        return result;
     }
 }

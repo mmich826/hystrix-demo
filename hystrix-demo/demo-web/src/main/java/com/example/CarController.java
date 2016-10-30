@@ -20,9 +20,6 @@ class CarController {
     @Autowired
     CarDataUsingCmdDao carDataUsingCmdDao;
 
-    @Autowired
-    HelloCommand helloCmd;
-
     @Value("${application.message:Hello World}")
     private String message = "Hello World";
 
@@ -38,7 +35,7 @@ class CarController {
     public String hello(Map<String, Object> model) {
         System.out.println("------ ctrl-hello");
         model.put("time", new Date());
-        model.put("message", helloCmd.run() );
+        model.put("message", new HelloCommand("Mikey").execute() );
         return "index";
     }
 

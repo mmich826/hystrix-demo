@@ -30,9 +30,4 @@ public class DemoWebApplication {
 	public HelloCommand helloCmd() {
 		return new HelloCommand("mikey");
 	}
-
-	@Bean
-	public CarDataCommand carDataCommand() {
-		return new CarDataCommand();
-	}
 }

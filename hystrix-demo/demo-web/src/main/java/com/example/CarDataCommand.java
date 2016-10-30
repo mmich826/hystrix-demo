@@ -4,23 +4,26 @@ import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandProperties;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-
+@Component
 public class CarDataCommand extends HystrixCommand<String> {
 
-    @Autowired
     private RestTemplate restTemplate;
 
-    public CarDataCommand() {
+    public CarDataCommand(RestTemplate restTemplate) {
         super(
             Setter.withGroupKey(
                 HystrixCommandGroupKey.Factory.asKey("ExampleGroup"))
                 .andCommandPropertiesDefaults(
                     HystrixCommandProperties.Setter()
-                        .withExecutionTimeoutInMilliseconds(500)
+                        .withExecutionTimeoutInMilliseconds(800)
                 )
         );
+
+        this.restTemplate = restTemplate;
     }
 
     @Override
