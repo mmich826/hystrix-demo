@@ -12,8 +12,8 @@ public class CarDataDao {
     @Autowired
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "getStuffFallback")
-    public String getStuff()
+    @HystrixCommand(fallbackMethod = "carDataFallback")
+    public String getCarData()
 
     {
         final String uri = "http://localhost:9090/msds/car";
@@ -24,8 +24,8 @@ public class CarDataDao {
         return result;
     }
 
-    public String getStuffFallback() {
-        System.out.println("------ fallback");
-        return "No Car (Fallback)";
+    public String carDataFallback() {
+        System.out.println("------ carDataFallback");
+        return "No Car (carDataFallback)";
     }
 }

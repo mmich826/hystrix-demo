@@ -3,15 +3,16 @@ package com.example;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 
-import static com.netflix.hystrix.HystrixCommandGroupKey.*;
 
+public class CarDataCommand extends HystrixCommand<String> {
 
-public class GetDataCommand extends HystrixCommand<String> {
+    @Autowired
+    private RestTemplate restTemplate;
 
-    private String name = null;
-
-    public GetDataCommand(String name) {
+    public CarDataCommand() {
         super(
             Setter.withGroupKey(
                 HystrixCommandGroupKey.Factory.asKey("ExampleGroup"))
@@ -20,16 +21,21 @@ public class GetDataCommand extends HystrixCommand<String> {
                         .withExecutionTimeoutInMilliseconds(500)
                 )
         );
-        this.name = name;
     }
 
     @Override
     protected String run() {
-        return "Hello " + name + "!";
+        final String uri = "http://localhost:9090/msds/car";
+
+        String result = restTemplate.getForObject(uri, String.class);
+
+        System.out.println(result);
+        return result;
     }
 
     @Override
     protected String getFallback() {
-        return "Hello Failure " + name + "!";
+        System.out.println("------ carDataFallback");
+        return "No Car (Fallback)";
     }
 }
