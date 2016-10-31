@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class DemoSvcApplication {
 
+//	private static DynamicLongProperty timeToWait = DynamicPropertyFactory
+//		.getInstance().getLongProperty("hystrixdemo.sleep", 100);
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoSvcApplication.class, args);
 	}
