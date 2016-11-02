@@ -24,12 +24,22 @@ public class DemoSvcApplication {
 @RestController
 class MyServiceController {
 	int counter = 0;
-	int sleepMilli = 300;
+	int sleepMilli = 5000;
 
 	@RequestMapping(value="/car", method = RequestMethod.GET)
 	String getCarData(Model model) {
 		try {
 			Thread.sleep(sleepMilli);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return "Car " + counter++;
+	}
+
+	@RequestMapping(value="/car-slow", method = RequestMethod.GET)
+	String getCarDataSlow(Model model) {
+		try {
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

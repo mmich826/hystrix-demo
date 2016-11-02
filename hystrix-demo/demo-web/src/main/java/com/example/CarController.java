@@ -31,6 +31,14 @@ class CarController {
         return "index";
     }
 
+    @GetMapping("/yurcar-slow")
+    public String getYurCarSlowt(Map<String, Object> model) {
+        System.out.println("------ ctrl-yurcarslow");
+        model.put("time", new Date());
+        model.put("message", carDao.getCarDataDirect() );
+        return "index";
+    }
+
     @GetMapping("/hellocmd")
     public String hello(Map<String, Object> model) {
         System.out.println("------ ctrl-hello");

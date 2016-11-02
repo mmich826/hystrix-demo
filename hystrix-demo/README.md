@@ -46,7 +46,10 @@ Run curl script.
 
 ## Presentation
 - General circuit concept
-- Meaning in microservices
-- Sequence Diagram
-- Example of real netflix UI (i.e. how to interpret)
 - Want to show 1) hystrix and 2) hystrix dashboard
+- Meaning in microservices
+- Component diagram of Hystrix Commands
+- Sequence Diagram
+1) Simple yurcar cmd with @Command annotation
+2) Hello Cmd using a command pattern.   Make service slow and hit with load.  Web should hang and then hit also from browser.  Should be slow/hang.
+3)  Intro Hystrix Dashboard and interpreting.   Example of real netflix UI (i.e. how to interpret)

@@ -28,4 +28,14 @@ public class CarDataDao {
         System.out.println("------ carDataFallback");
         return "No Car (carDataFallback)";
     }
+
+
+    public String getCarDataDirect() {
+        final String uri = "http://localhost:9090/msds/car-slow";
+
+        String result = restTemplate.getForObject(uri, String.class);
+
+        System.out.println(result);
+        return result;
+    }
 }
