@@ -30,4 +30,7 @@ public class DemoWebApplication {
 	public HelloCommand helloCmd() {
 		return new HelloCommand("mikey");
 	}
+
+	@Bean
+	public HelloService helloService() { return new HelloService("mikey!");}
 }

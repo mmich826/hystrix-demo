@@ -15,6 +15,9 @@ import java.util.Map;
 class CarController {
 
     @Autowired
+    HelloService helloService;
+
+    @Autowired
     CarDataDao carDao;
 
     @Autowired
@@ -22,6 +25,23 @@ class CarController {
 
     @Value("${application.message:Hello World}")
     private String message = "Hello World";
+
+
+    @GetMapping("/hello")
+    public String hello(Map<String, Object> model) {
+        System.out.println("------ ctrl-hello");
+        model.put("time", new Date());
+        model.put("message", helloService.sayHello() );
+        return "index";
+    }
+
+    @GetMapping("/hello/cmd")
+    public String helloCmd(Map<String, Object> model) {
+        System.out.println("------ ctrl-hellocmd");
+        model.put("time", new Date());
+        model.put("message", new HelloCommand("Mikey").execute() );
+        return "index";
+    }
 
     @GetMapping("/yurcar")
     public String getYurCar(Map<String, Object> model) {
@@ -31,23 +51,7 @@ class CarController {
         return "index";
     }
 
-    @GetMapping("/yurcar-slow")
-    public String getYurCarSlowt(Map<String, Object> model) {
-        System.out.println("------ ctrl-yurcarslow");
-        model.put("time", new Date());
-        model.put("message", carDao.getCarDataDirect() );
-        return "index";
-    }
-
-    @GetMapping("/hellocmd")
-    public String hello(Map<String, Object> model) {
-        System.out.println("------ ctrl-hello");
-        model.put("time", new Date());
-        model.put("message", new HelloCommand("Mikey").execute() );
-        return "index";
-    }
-
-    @GetMapping("/yurcar-cmd")
+    @GetMapping("/yurcar/cmd")
     public String getYurCarCmd(Map<String, Object> model) {
         System.out.println("------ ctrl-yurcar-cmd");
         model.put("time", new Date());
@@ -55,28 +59,11 @@ class CarController {
         return "index";
     }
 
-    @RequestMapping("/serviceUnavailable")
-    public String ServiceUnavailable() {
-        throw new ServiceUnavailableException();
-    }
-
-    @RequestMapping("/bang")
-    public String bang() {
-        throw new RuntimeException("Boom");
-    }
-
-    @RequestMapping("/insufficientStorage")
-    public String insufficientStorage() {
-        throw new InsufficientStorageException();
-    }
-
-    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
-    private static class ServiceUnavailableException extends RuntimeException {
-
-    }
-
-    @ResponseStatus(HttpStatus.INSUFFICIENT_STORAGE)
-    private static class InsufficientStorageException extends RuntimeException {
-
+    @GetMapping("/yurcar/slow")
+    public String getYurCarSlowtf(Map<String, Object> model) {
+        System.out.println("------ ctrl-yurcarslow");
+        model.put("time", new Date());
+        model.put("message", carDao.getCarDataDirect() );
+        return "index";
     }
 }

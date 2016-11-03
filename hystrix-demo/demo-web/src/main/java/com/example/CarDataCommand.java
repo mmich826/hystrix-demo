@@ -16,7 +16,7 @@ public class CarDataCommand extends HystrixCommand<String> {
     public CarDataCommand(RestTemplate restTemplate) {
         super(
             Setter.withGroupKey(
-                HystrixCommandGroupKey.Factory.asKey("ExampleGroup"))
+                HystrixCommandGroupKey.Factory.asKey("DemoGroup"))
                 .andCommandPropertiesDefaults(
                     HystrixCommandProperties.Setter()
                         .withExecutionTimeoutInMilliseconds(800)

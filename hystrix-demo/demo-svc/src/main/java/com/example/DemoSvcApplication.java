@@ -24,7 +24,7 @@ public class DemoSvcApplication {
 @RestController
 class MyServiceController {
 	int counter = 0;
-	int sleepMilli = 5000;
+	int sleepMilli = 300;
 
 	@RequestMapping(value="/car", method = RequestMethod.GET)
 	String getCarData(Model model) {

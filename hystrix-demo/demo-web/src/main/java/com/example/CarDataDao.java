@@ -12,7 +12,7 @@ public class CarDataDao {
     @Autowired
     private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "carDataFallback")
+    @HystrixCommand(fallbackMethod = "carDataFallback", threadPoolKey = "DemoGroup")
     public String getCarData()
 
     {

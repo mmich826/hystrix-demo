@@ -12,7 +12,7 @@ public class HelloCommand extends HystrixCommand<String> {
     public HelloCommand(String name) {
         super(
             Setter.withGroupKey(
-                HystrixCommandGroupKey.Factory.asKey("ExampleGroup"))
+                HystrixCommandGroupKey.Factory.asKey("DemoGroup"))
                 .andCommandPropertiesDefaults(
                     HystrixCommandProperties.Setter()
                         .withExecutionTimeoutInMilliseconds(500)
