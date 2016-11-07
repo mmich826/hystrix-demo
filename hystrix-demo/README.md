@@ -55,13 +55,11 @@ Run curl script.
 - Diagram of basic service call (ctrl, srv client,  svc)
 -SETUP iterm with 3 windows on top and one/two on bottom
 1) Intro:  Hello cmd with @HystCommand annotation (Diagram:  ctrl, srv client, Hyst Cmd,  svc)
-2) Intro:  yurcar/cmd .  SHOW:  hit endpt
-2) Intro Hystrix Dashboard and interpreting.   Example of real netflix UI (i.e. how to interpret)
-3) Intro: how slow svc can drag down a web page.  Show how 5 sec delay compounds to 10+   http://localhost:8080/junkerscom/yurcar/slow  with load of -n 10000 -c 10.
-4) Intro Hello Cmd using a command pattern.   SHOW:  run demo-curl hitting hellocmd and yurcar/cmd.  
-5) Same as #4 but now kill svc and show dashboard.  Restart to show recovery
-6) Same as #4 but now add Load with:  ab -n 10000 -c 5 http://localhost:8080/junkerscom/yurcar/cmd.  Show dashboard and running successfully.  
-NOW:  introduce another load:  ab -n 1000 -c 7 http://localhost:8080/junkerscom/yurcar/cmd
-Page should now get errors.  
-7)  Show other config params to tweak monitoring
+2) Intro:  yurcar/cmd .  SHOW:  hit endpt.  SHOW:  run demo-curl hitting hellocmd and yurcar/cmd.
+3) Intro: how slow svc can drag down a web page.  Show how 5 sec delay in svc compounds to 10+   http://localhost:8080/junkerscom/yurcar/slow  with load of -n 10000 -c 10.  Hit same url from a browser and time.
+2) Intro Hystrix Dashboard and interpreting.   SHOW:  slide example of real netflix UI
+2) NOW run same prev load and hit with yurcar/cmd endpt.  FAST
+5) Intro failure.  Load ab -n 10000 -c 2 http://localhost:8080/junkerscom/yurcar/cmd.  Kill svc and show dashboard.  Restart to show recovery
+NOW:  introduce load:  ab -n 10000 -c 2 http://localhost:8080/junkerscom/yurcar/cmd.  In another window, intro another load.  Start with -c 2.  Go to 4,5, etc.  WATCH DASHBOARD and how app responds
+7)  Show other config params to tweak monitoring.  Add:  .withCircuitBreakerRequestVolumeThreshold(1000)  watch fallbacks go away and thread timeouts go up
 
