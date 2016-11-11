@@ -36,12 +36,8 @@ http://localhost:8080/junkerscom/yurcar/cmd
 http://localhost:7979/hystrix-dashboard  -  http://localhost:8080/junkerscom/hystrix.stream
 
 
-## Scenarios
-1) 
-Run Svc @ 300ms sleep.  
-Run curl script.  
- ab -n 10000 -c 3 http://localhost:8080/junkerscom/yurcar/cmd
- Then, start  ab -n 10000 -c 6 http://localhost:8080/junkerscom/yurcar/cmd   (adjust c to 7 or more for failures)
+## Hystrix Dashboard
+In hystrix-demo/Hystrix/hystrix-dashboard, ../gradlew jettyRun
 
 
 ## Presentation
@@ -57,9 +53,9 @@ Run curl script.
 1) Intro:  Hello cmd with @HystCommand annotation (Diagram:  ctrl, srv client, Hyst Cmd,  svc)
 2) Intro:  yurcar/cmd .  SHOW:  hit endpt.  SHOW:  run demo-curl hitting hellocmd and yurcar/cmd.
 3) Intro: how slow svc can drag down a web page.  Show how 5 sec delay in svc compounds to 10+   http://localhost:8080/junkerscom/yurcar/slow  with load of -n 10000 -c 10.  Hit same url from a browser and time.
-2) Intro Hystrix Dashboard and interpreting.   SHOW:  slide example of real netflix UI
-2) NOW run same prev load and hit with yurcar/cmd endpt.  FAST
-5) Intro failure.  Load ab -n 10000 -c 2 http://localhost:8080/junkerscom/yurcar/cmd.  Kill svc and show dashboard.  Restart to show recovery
+4) Intro Hystrix Dashboard and interpreting.   SHOW:  slide example of real netflix UI
+5) NOW run same prev load and hit with yurcar/cmd endpt.  FAST
+6) Intro failure.  Load ab -n 10000 -c 2 http://localhost:8080/junkerscom/yurcar/cmd.  Kill svc and show dashboard.  Restart to show recovery
 NOW:  introduce load:  ab -n 10000 -c 2 http://localhost:8080/junkerscom/yurcar/cmd.  In another window, intro another load.  Start with -c 2.  Go to 4,5, etc.  WATCH DASHBOARD and how app responds
 7)  Show other config params to tweak monitoring.  Add:  .withCircuitBreakerRequestVolumeThreshold(1000)  watch fallbacks go away and thread timeouts go up
 
