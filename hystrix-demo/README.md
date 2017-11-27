@@ -41,13 +41,29 @@ In hystrix-demo/Hystrix/hystrix-dashboard, ../gradlew jettyRun
 
 
 ## Presentation
-- Want to show 1) hystrix and 2) hystrix dashboard
 - General circuit concept
-- Meaning in microservices
+- microservices and SOA challenges via component diagram
 - Component diagram of Hystrix Commands
-- Sequence Diagram
+- Dashboard overview.
+- Demo:
+    1) No cmd.
+        1) Postman.  500 MS sleep.  Fast ~520MS
+        2) Run load.  Watch resp time go up.
+        artillery quick -d 360  -r 10 http://localhost:8080/junkerscom/yurcar
+            - Run addition window load with r=45.  Then stop.  Show how svc performance doesn't return
+        3) Stop the service.  Show 500 return status
+    2) With cmd.
+        1) Postman.  500 MS sleep.  Fast ~520MS
+        2) Run load.  Watch resp time go up.
+        ab -n 20000 -c 7 http://localhost:8080/junkerscom/yurcar/cmd
+            - Run addition window load with r=2, 3.  Then stop.  Show how svc performance doesn't return
+        3) Stop the service.  Show fallback
+- Code and Config
+- Cost (overhead) of hystrix
+- Splunk dashboard
 
 
+PREVIOUS:
 - Diagram of basic service call (ctrl, srv client,  svc)
 -SETUP iterm with 3 windows on top and one/two on bottom
 1) Intro:  Hello cmd with @HystCommand annotation (Diagram:  ctrl, srv client, Hyst Cmd,  svc)

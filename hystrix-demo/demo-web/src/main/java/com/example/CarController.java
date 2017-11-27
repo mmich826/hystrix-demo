@@ -2,11 +2,8 @@ package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.Date;
 import java.util.Map;
@@ -19,6 +16,9 @@ class CarController {
 
     @Autowired
     CarDataDao carDao;
+
+    @Autowired
+    CarDataDaoSimpleCmd carDaoSimpleCmd;
 
     @Autowired
     CarDataUsingCmdDao carDataUsingCmdDao;
@@ -47,13 +47,21 @@ class CarController {
     public String getYurCar(Map<String, Object> model) {
         System.out.println("------ ctrl-yurcar");
         model.put("time", new Date());
-        model.put("message", carDao.getCarData() );
+        model.put("message", carDao.getCarData());
+        return "index";
+    }
+
+    @GetMapping("/yurcar/cmdsimple")
+    public String getYurCarSimpleCmd(Map<String, Object> model) {
+        System.out.println("------ ctrl-yurcar/cmdsimple");
+        model.put("time", new Date());
+        model.put("message", carDaoSimpleCmd.getCarData() );
         return "index";
     }
 
     @GetMapping("/yurcar/cmd")
     public String getYurCarCmd(Map<String, Object> model) {
-        System.out.println("------ ctrl-yurcar-cmd");
+        System.out.println("------ ctrl-yurcar/cmd");
         model.put("time", new Date());
         model.put("message", carDataUsingCmdDao.getCarData2() );
         return "index";
@@ -61,9 +69,9 @@ class CarController {
 
     @GetMapping("/yurcar/slow")
     public String getYurCarSlowtf(Map<String, Object> model) {
-        System.out.println("------ ctrl-yurcarslow");
+        System.out.println("------ ctrl-yurcar/slow");
         model.put("time", new Date());
-        model.put("message", carDao.getCarDataDirect() );
+        model.put("message", carDaoSimpleCmd.getCarDataDirect() );
         return "index";
     }
 }
