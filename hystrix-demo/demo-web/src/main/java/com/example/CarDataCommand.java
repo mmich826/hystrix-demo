@@ -19,7 +19,8 @@ public class CarDataCommand extends HystrixCommand<String> {
                 HystrixCommandGroupKey.Factory.asKey("DemoGroup"))
                 .andCommandPropertiesDefaults(
                     HystrixCommandProperties.Setter()
-                        .withExecutionTimeoutInMilliseconds(1200)
+                        .withExecutionTimeoutInMilliseconds(500)
+                        .withCircuitBreakerErrorThresholdPercentage(20)
                 )
         );
 

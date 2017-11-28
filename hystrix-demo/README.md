@@ -46,16 +46,18 @@ In hystrix-demo/Hystrix/hystrix-dashboard, ../gradlew jettyRun
 - Component diagram of Hystrix Commands
 - Dashboard overview.
 - Demo:
+    0) local hystrix dashboard:
+        http://localhost:7979/hystrix-dashboard/monitor/monitor.html?streams=%5B%7B%22name%22%3A%22%22%2C%22stream%22%3A%22http%3A%2F%2Flocalhost%3A8080%2Fjunkerscom%2Fhystrix.stream%22%2C%22auth%22%3A%22%22%2C%22delay%22%3A%22%22%7D%5D
     1) No cmd.
-        1) Postman.  500 MS sleep.  Fast ~520MS
+        1) Postman.  100 MS sleep.  Fast ~110 MS
         2) Run load.  Watch resp time go up.
-        artillery quick -d 360  -r 10 http://localhost:8080/junkerscom/yurcar
-            - Run addition window load with r=45.  Then stop.  Show how svc performance doesn't return
+        artillery quick -d 360  -r 50 http://localhost:8080/junkerscom/yurcar
+            - Run addition window load with r=10.  Then stop.  Show how svc performance doesn't return
         3) Stop the service.  Show 500 return status
     2) With cmd.
-        1) Postman.  500 MS sleep.  Fast ~520MS
+        1) Postman.  100 MS sleep.  Fast ~110 MS
         2) Run load.  Watch resp time go up.
-        ab -n 20000 -c 7 http://localhost:8080/junkerscom/yurcar/cmd
+        ab -n 50000 -c 7 http://localhost:8080/junkerscom/yurcar/cmd
             - Run addition window load with r=2, 3.  Then stop.  Show how svc performance doesn't return
         3) Stop the service.  Show fallback
 - Code and Config
