@@ -46,12 +46,14 @@ In hystrix-demo/Hystrix/hystrix-dashboard, ../gradlew jettyRun
 - Component diagram of Hystrix Commands
 - Dashboard overview.
 - Demo:
+    00) OPEN:  Local Hystrix Dashboard, Splunk , Prod Hystrix Dashboard
     0) local hystrix dashboard:
         http://localhost:7979/hystrix-dashboard/monitor/monitor.html?streams=%5B%7B%22name%22%3A%22%22%2C%22stream%22%3A%22http%3A%2F%2Flocalhost%3A8080%2Fjunkerscom%2Fhystrix.stream%22%2C%22auth%22%3A%22%22%2C%22delay%22%3A%22%22%7D%5D
+        https://splunk.cars.com/en-US/app/search/search?q=search%20host%3D%22cs1*%22%20hystrix%20source%3D%22%2Fapps%2FIBM%2FWebSphere%2F85%2FAppServer%2Fprofiles%2FSvcProfile%2Flogs%2FComposite_ListingAPI*%2FSystemOut.log%22&display.page.search.mode=verbose&dispatch.sample_ratio=1&earliest=-24h%40h&latest=now&sid=1511935021.513695_AFB14F10-1B38-4E2F-83E5-25E32CC17D43&display.events.fields=%5B%22host%22%2C%22source%22%2C%22sourcetype%22%2C%22hystrix_command%22%2C%22hystrix_fallback_reason%22%2C%22hystrix_fallback_source%22%5D
     1) No cmd.
         1) Postman.  100 MS sleep.  Fast ~110 MS
         2) Run load.  Watch resp time go up.
-        artillery quick -d 360  -r 50 http://localhost:8080/junkerscom/yurcar
+        artillery quick -d 360  -r 10 http://localhost:8080/junkerscom/yurcar      10, 20, 40
             - Run addition window load with r=10.  Then stop.  Show how svc performance doesn't return
         3) Stop the service.  Show 500 return status
     2) With cmd.
